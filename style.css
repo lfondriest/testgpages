@@ -12,3 +12,13 @@ body{
 h1{
   text-align: center;
 }
+
+.logo{
+    width: 30%;
+    height: 30%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -75px;
+    margin-bottom: -30px;
+}
