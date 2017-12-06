@@ -23,10 +23,10 @@
   <body>
       <img src="http://diylogodesigns.com/blog/wp-content/uploads/2016/06/NBA-logo-png-download-free.png" class="logo">
       <div class="btn-group btn-group-justified">
-        <div class="btn-group btn-sing"><a href="/testgpages/olives-eda.html">
+        <div class="btn-group btn-sing"><a href="/olives-eda.html">
           <button type="button" class="btn btn-primary">Introduction of Data</button></a>
         </div>
-        <div class="btn-group btn-sing"><a href="/testgpages/olives-model.html">
+        <div class="btn-group btn-sing"><a href="/olives-model.html">
           <button type="button" class="btn btn-primary">Modeling Approach</button></a>
         </div>
         <div class="btn-group btn-sing">
@@ -36,21 +36,24 @@
           <button type="button" class="btn btn-primary">Authors & Sources</button>
         </div>
       </div>
-      <h1>The Case of the Italian Olives (LEO'S TEST)</h1>
+      <div>
+        <h1>NBA Win Probabilty based on Play-by-Play Data</h1>
+      </div>
 
-      <p>This is the home page</p>
+      <div class="row">
+        <div class="col-sm-6" id="table_space">
+        </div>
+        <div class="col-sm-6">
+          <div id="chart-area"></div>
+        </div>
+      </div>
 
-<h2 id="lets-have-fun">Lets have fun</h2>
 
-<blockquote>
-  <p>here is a quote</p>
-</blockquote>
-
-<p>Here is <em>emph</em> and <strong>bold</strong>.</p>
-
-<p>Here is some inline math $\alpha = \frac{\beta}{\gamma}$ and, of-course, E rules:</p>
-
-<script type="math/tex; mode=display">G_{\mu\nu} + \Lambda g_{\mu\nu}  = 8 \pi T_{\mu\nu} .</script>
+      <script src="jquery.min.js"></script>
+      <script src="bootstrap.min.js"></script>
+      <script src="d3.js"></script>
+      <script src="queue.min.js"></script>
+      <script src="main.js"></script>
 
   </body>
 </html>
