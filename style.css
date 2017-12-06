@@ -1,4 +1,10 @@
 body{
   background-color: skyblue;
-  padding: 20px;
+  padding: 40px;
+}
+
+.btn-group{
+    border: solid;
+    border-width: 2px;
+    border-color: white;
 }
