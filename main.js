@@ -31,7 +31,7 @@ queue()
         all_probas = probabilities;
 
 
-        var columns = ['gameID','away_team','away_score','home_team','home_score',''];
+        var columns = ['gameID','away_team','away_score','home_team','home_score'];
 
         buildTable(games,columns);
         updateVisualization(0)
