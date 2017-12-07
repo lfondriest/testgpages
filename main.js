@@ -14,7 +14,7 @@ var svg = d3.select("#chart-area").append("svg")
 
 queue()
     .defer(d3.csv, "games.csv")
-    .defer(d3.csv, "probabilities.csv")
+    .defer(d3.csv, "probabilities2.csv")
     .await(function(error, games, probabilities){
 
         games.forEach(function(d){
@@ -30,10 +30,7 @@ queue()
         all_games = games;
         all_probas = probabilities;
 
-
-        var columns = ['gameID','away_team','away_score','home_team','home_score'];
-
-        buildTable(games,columns);
+        buildTable(games);
         updateVisualization(0)
     });
 
@@ -80,14 +77,25 @@ svg.append("text")
 svg.append("path")
     .attr("class", "line");
 
-function buildTable(games, columns){
+var $window = $(window),
+    $stickyEl = $('#chart-area'),
+    elTop = $stickyEl.offset().top;
+
+$window.scroll(function() {
+    $stickyEl.toggleClass('sticky', $window.scrollTop() > elTop);
+});
+
+function buildTable(games){
     var table = d3.select("#table_space").append("table");
     var thead = table.append('thead');
     var tbody = table.append('tbody');
 
+    var columns = ['away_team','away_score','home_team','home_score','gameID'];
+    var column_names = ['Away Team','Away Score','Home Team','Home Score', 'View Chart'];
+
     thead.append('tr')
         .selectAll('th')
-        .data(columns)
+        .data(column_names)
         .enter()
         .append('th')
         .text(function (d) { return d });
@@ -112,7 +120,12 @@ function buildTable(games, columns){
             else
                 return "other"
         })
-        .text(function (d) {return d.value });
+        .text(function (d) {
+            if(d.column === "gameID"){
+                return "View Chart"
+            }
+            else
+                return d.value });
 
     d3.selectAll(".clickable")
         .on("click", function(d){
@@ -162,25 +175,31 @@ function updateVisualization(selected) {
     svg.select(".line").transition().duration(800)
         .attr("d", drawLine(filteredData));
 
-}
-/*
-document.getElementById("myTable").style.display = "none";
-
-// Show details for a specific FIFA World Cup
-function showEdition(d){
-    document.getElementById("myTable").style.display = "block";
-    var info = ["EDITION", "WINNER", "GOALS", "AVERAGE_GOALS", "MATCHES", "TEAMS", "AVERAGE_ATTENDANCE"];
-
-    for (var i=0; i<info.length; i++){
-        document.getElementById(info[i]).innerHTML = d[info[i]];
-    }
-
-}
-
+    var circle = svg.selectAll("circle")
+        .data(filteredData);
 
     var tool_tip = d3.tip()
         .attr("class", "d3-tip")
         .offset([-12, 0])
-        .html(function(d) { return(d.EDITION + "<br>" + toTitleCase(selected) + ": "  + d[selected]) });
+        .html(function(d) { return(all_games[selected].home_team + ": " + d.home + "<br>" + all_games[selected].away_team + ": " + d.away) });
     svg.call(tool_tip);
-*/
+
+    circle.enter().append("circle")
+        .attr("class", "dot")
+        .merge(circle)
+        .attr("r", "4")
+        .attr("opacity", 0.0)
+        .on('mouseover', tool_tip.show)
+        .on('mouseout', tool_tip.hide);
+        //.on('click', showEdition);
+
+    svg.selectAll(".dot").transition().duration(800)
+        .attr("cy", function (d) {
+            return y(d.proba)
+        })
+        .attr("cx", function (d) {
+            return x(d.min_rem)
+        });
+
+    circle.exit().remove();
+}

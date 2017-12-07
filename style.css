@@ -1,21 +1,33 @@
 body{
-  background-color: skyblue;
-  padding: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#chart-area.sticky {
+    position: fixed;
+    top: 0;
+}
+
+.chart_title{
+    font-size: 18px;
+    fill: #ED174B;
 }
 
 .btn-group{
     border: solid;
     border-width: 2px;
     border-color: white;
+    padding-bottom: 10px;
 }
 
 h1{
-  text-align: center;
+    text-align: center;
+    padding-bottom: 30px;
 }
 
 .logo{
-    width: 30%;
-    height: 30%;
+    width: 25%;
+    height: 25%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -35,26 +47,29 @@ h1{
 
 .line {
     fill: none;
-    stroke: #a60b0b;
+    stroke: #ED174B;
     stroke-width: 1.5px;
 }
 
+table{
+    width: 90%;
+}
 
 tr{
-    background-color: #f99090;
+    background-color: #ffa99d;
     border-bottom: 1px solid black;
     margin-bottom: 5px;
+    font-size: 10px;
 }
 
 th{
-    background-color: #910b0b;
+    background-color: #ED174B;
     font-weight: bold;
     color: white;
 }
 
-td{
-    padding: 15px;
-    padding-right: 10px;
+td, th{
+    padding-left: 10px;
 }
 
 .clickable{
@@ -64,4 +79,40 @@ td{
 .clickable:hover{
     text-decoration: underline;
     color: #5da0e6;
+    cursor: pointer;
+}
+
+
+
+.dot:hover{
+    opacity: 1;
+    fill: #910b0b;
+}
+
+.d3-tip {
+    line-height: 1;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
 }
