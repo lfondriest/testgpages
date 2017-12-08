@@ -14,7 +14,7 @@ var svg = d3.select("#chart-area").append("svg")
 
 queue()
     .defer(d3.csv, "games.csv")
-    .defer(d3.csv, "probabilities2.csv")
+    .defer(d3.csv, "Logit_new.csv")
     .await(function(error, games, probabilities){
 
         games.forEach(function(d){
@@ -151,7 +151,7 @@ function updateVisualization(selected) {
         .text(all_games[selected].away_team + " @ " + all_games[selected].home_team);
 
     d3.selectAll(".ylabel")
-        .text(all_games[selected].home_team + " Win Probability ");
+        .text(all_games[selected].away_team + " Win Probability ");
 
     //Axes
     var xAxis = d3.axisBottom()
